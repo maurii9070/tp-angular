@@ -131,7 +131,10 @@
 
 	@if(ventaBoletosService.ventas.length > 0) {
 	<div class="xl:flex lg:gap-8">
-		<lista-boletos [ventas]="ventaBoletosService.ventas"></lista-boletos>
+		<lista-boletos
+			[ventas]="ventaBoletosService.ventas"
+			(eliminarVenta)="ventaBoletosService.eliminarVenta($event)"
+		></lista-boletos>
 		<resumen-venta></resumen-venta>
 	</div>
 	} @else{

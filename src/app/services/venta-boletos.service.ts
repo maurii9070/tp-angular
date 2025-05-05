@@ -54,4 +54,11 @@ export class VentaBoletosService {
 
 		return precio - precio * descuento
 	}
+
+	public eliminarVenta(boleto: Boleto): void {
+		const index = this.ventas.findIndex(venta => venta === boleto)
+		if (index !== -1) {
+			this.ventas.splice(index, 1)
+		}
+	}
 }
