@@ -1,0 +1,87 @@
+<header class="bg-slate-800 shadow-md">
+	<nav class="max-w-7xl mx-auto px-4">
+		<div class="flex items-center justify-between h-16">
+			<!-- Logo -->
+			<div class="flex-shrink-0">
+				<a
+					href="/"
+					class="flex items-center"
+				>
+					<span class="text-white font-bold text-xl">TP3 Angular</span>
+				</a>
+			</div>
+
+			<!-- Links de navegación - visible en pantallas medianas y grandes -->
+			<div class="hidden md:block">
+				<div class="ml-10 flex items-baseline space-x-4">
+					<a
+						routerLink="/punto1"
+						routerLinkActive="text-green-300"
+						class="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md font-medium"
+					>
+						Punto 1
+					</a>
+					<a
+						routerLink="/punto2"
+						routerLinkActive="text-green-300"
+						class="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md font-medium"
+					>
+						Punto 2
+					</a>
+					<a
+						routerLink="/punto3"
+						routerLinkActive="text-green-300"
+						class="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md font-medium"
+						>Punto 3
+					</a>
+					<a
+						routerLink="/punto4"
+						routerLinkActive="text-green-300"
+						class="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md font-medium"
+						>Punto 4
+					</a>
+				</div>
+			</div>
+
+			<!-- Botón del menú hamburguesa - visible solo en pantallas pequeñas -->
+			<div class="md:hidden">
+				<button
+					(click)="toggleMenu()"
+					type="button"
+					class="inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-white hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white"
+				>
+					<span class="sr-only">Abrir menú principal</span>
+					<app-menu-open *ngIf="!menuOpen"></app-menu-open>
+					<app-menu-close *ngIf="menuOpen"></app-menu-close>
+				</button>
+			</div>
+		</div>
+
+		<!-- Menú móvil, cuando está abierto -->
+		<div
+			[ngClass]="{ block: menuOpen, hidden: !menuOpen }"
+			class="md:hidden"
+		>
+			<div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
+				<a
+					routerLink="/punto1"
+					class="text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md font-medium"
+				>
+					Punto 1
+				</a>
+				<a
+					routerLink="/punto2"
+					class="text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md font-medium"
+				>
+					Punto 2
+				</a>
+				<a
+					routerLink="/punto3"
+					class="text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md font-medium"
+				>
+					Punto 3
+				</a>
+			</div>
+		</div>
+	</nav>
+</header>

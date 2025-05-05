@@ -1,0 +1,140 @@
+<div class="container mx-auto py-8 px-4">
+	<h1 class="text-3xl font-bold mb-6 text-center">Compra de Boletos</h1>
+
+	<div class="bg-white shadow-md rounded-lg p-6 max-w-lg mx-auto">
+		<form
+			(ngSubmit)="onSubmit()"
+			#boletoForm="ngForm"
+		>
+			<div class="mb-4">
+				<label
+					for="dni"
+					class="block text-gray-700 text-sm font-bold mb-2"
+				>
+					DNI:
+				</label>
+				<input
+					type="text"
+					id="dni"
+					name="dni"
+					[(ngModel)]="boleto.dni"
+					required
+					class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+				/>
+			</div>
+
+			<div class="mb-4">
+				<label
+					for="precio"
+					class="block text-gray-700 text-sm font-bold mb-2"
+				>
+					Precio:
+				</label>
+				<input
+					type="number"
+					id="precio"
+					name="precio"
+					[(ngModel)]="boleto.precio"
+					required
+					min="0"
+					class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+				/>
+			</div>
+
+			<div class="mb-4">
+				<label
+					for="categoria"
+					class="block text-gray-700 text-sm font-bold mb-2"
+				>
+					Categoría de Turista:
+				</label>
+				<select
+					id="categoria"
+					name="categoria"
+					[(ngModel)]="boleto.categoriaTurista"
+					required
+					class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+				>
+					<option
+						value=""
+						disabled
+					>
+						-- Seleccione una categoría --
+					</option>
+					@for(categoria of ventaBoletosService.categorias; track categoria.id) {
+					<option [value]="categoria.id">{{ categoria.nombre }}</option>
+					}
+				</select>
+			</div>
+
+			<div class="mb-4">
+				<label
+					for="fechaCompra"
+					class="block text-gray-700 text-sm font-bold mb-2"
+				>
+					Fecha de Compra:
+				</label>
+				<input
+					type="date"
+					id="fechaCompra"
+					name="fechaCompra"
+					[(ngModel)]="boleto.fechaCompra"
+					required
+					class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+				/>
+			</div>
+
+			<div class="mb-4">
+				<label
+					for="email"
+					class="block text-gray-700 text-sm font-bold mb-2"
+				>
+					Email:
+				</label>
+				<input
+					type="email"
+					id="email"
+					name="email"
+					[(ngModel)]="boleto.email"
+					required
+					pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$"
+					class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+				/>
+			</div>
+
+			<div class="flex items-center justify-between">
+				<button
+					type="submit"
+					[disabled]="!boletoForm.form.valid"
+					class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 disabled:opacity-50"
+				>
+					Registrar Boleto
+				</button>
+				<div class="">
+					<label class="font-bold text-gray-700">
+						Total:
+						<span class="text-blue-500 font-bold">
+							@if(boleto.categoriaTurista && boleto.precio){
+							{{
+								ventaBoletosService.precioFinal(boleto.precio, +boleto.categoriaTurista)
+									| currency : 'USD' : '$' : '1.2-2'
+							}}
+							} @else {
+							{{ '-' }}
+							}
+						</span>
+					</label>
+				</div>
+			</div>
+		</form>
+	</div>
+
+	@if(ventaBoletosService.ventas.length > 0) {
+	<div class="xl:flex lg:gap-8">
+		<lista-boletos [ventas]="ventaBoletosService.ventas"></lista-boletos>
+		<resumen-venta></resumen-venta>
+	</div>
+	} @else{
+	<p class="text-center text-gray-500 mt-8">No hay boletos vendidos aún.</p>
+	}
+</div>

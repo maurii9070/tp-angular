@@ -1,0 +1,42 @@
+<!-- Resumen de ventas por categoría -->
+<div class="mt-8 bg-white shadow-md rounded-lg p-6 max-w-md mx-auto">
+	<h2 class="text-2xl font-bold mb-4">Resumen de Ventas</h2>
+	<div class="mb-4">
+		<div class="overflow-x-auto">
+			<table class="min-w-full">
+				<thead>
+					<tr class="bg-gray-100 border-b">
+						<th class="px-4 py-2 text-left text-xs font-medium text-gray-500 uppercase">Categoría</th>
+						<th class="px-4 py-2 text-left text-xs font-medium text-gray-500 uppercase">Monto</th>
+						<th class="px-4 py-2 text-left text-xs font-medium text-gray-500 uppercase">Cantidad</th>
+					</tr>
+				</thead>
+				<tbody>
+					@for(resumenVenta of ventaBoletosService.obtenerResumenVentasPorCategoria(); track
+					resumenVenta.categoria) {
+					<tr class="border-b hover:bg-gray-50">
+						<td class="px-4 py-2">{{ resumenVenta.categoria }}</td>
+						<td class="px-4 py-2">{{ resumenVenta.total | currency : 'USD' : '$' }}</td>
+						<td class="px-4 py-2">{{ resumenVenta.cantidad }}</td>
+					</tr>
+					}
+				</tbody>
+			</table>
+		</div>
+	</div>
+
+	<div class="">
+		<div class="flex justify-between items-center">
+			<span class="text-xl font-bold">Total General:</span>
+			<span class="text-xl text-blue-700 font-bold">
+				{{ ventaBoletosService.obtenerTotalVentas() | currency : 'USD' : '$' }}
+			</span>
+		</div>
+		<p class="text-sm text-gray-500 mt-2">
+			<span>Cantidad boletos vendidos:</span>
+			<span class="font-bold">
+				{{ ventaBoletosService.obtenerTotalBoletosVendidos() }}
+			</span>
+		</p>
+	</div>
+</div>

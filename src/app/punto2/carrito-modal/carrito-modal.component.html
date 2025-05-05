@@ -1,0 +1,70 @@
+<div class="fixed h-screen w-screen inset-0 bg-black/80">
+	<div class="w-full h-full flex justify-center items-center">
+		<div class="bg-white w-md">
+			<div class="bg-slate-800 py-4">
+				<h2 class="text-gray-200 text-2xl font-bold px-4">Carrito</h2>
+			</div>
+			<div class="mt-4">
+				<div class="overflow-y-auto max-h-96">
+					@if(carrito.length){
+					<ul class="divide-y divide-gray-200">
+						@for(item of carrito; track item.id) {
+						<li class="p-4 hover:bg-gray-100 transition-colors duration-300">
+							<div class="flex items-center">
+								<img
+									[src]="`/assets/images/${item.image}.webp`"
+									[alt]="item.nombre"
+									class="w-16 h-16 object-cover rounded mr-4"
+								/>
+								<div>
+									<h3 class="text-md font-semibold">{{ item.nombre }}</h3>
+									<p class="text-gray-600">${{ item.precio }}</p>
+								</div>
+								<div class="flex items-center mt-2 ml-auto">
+									<span class="text-sm text-gray-500 mr-2">Cantidad:</span>
+									<div class="flex items-center border border-gray-300 rounded">
+										<button
+											(click)="onDiminuirCantidad(item)"
+											class="px-2 py-1 bg-gray-200 hover:bg-gray-300"
+										>
+											-
+										</button>
+										<span class="px-3">{{ item.cantidad || 1 }}</span>
+										<button
+											(click)="onAumentarCantidad(item)"
+											class="px-2 py-1 bg-gray-200 hover:bg-gray-300"
+										>
+											+
+										</button>
+									</div>
+								</div>
+							</div>
+							<div class="text-end">
+								<button
+									class="text-red-500 px-2 rounded cursor-pointer"
+									(click)="onEliminarProducto(item)"
+								>
+									Eliminar
+								</button>
+							</div>
+						</li>
+						}
+					</ul>
+					} @else {
+					<div class="flex items-center justify-center h-full">
+						<p class="text-gray-500">El carrito está vacío</p>
+					</div>
+					}
+				</div>
+			</div>
+			<div class="p-4 text-end">
+				<button
+					(click)="onCerrarModal()"
+					class="bg-red-500 text-gray-200 font-bold py-2 px-4 rounded mt-4 hover:bg-slate-700 transition duration-300"
+				>
+					Cerrar
+				</button>
+			</div>
+		</div>
+	</div>
+</div>
