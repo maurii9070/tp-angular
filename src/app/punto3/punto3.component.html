@@ -39,7 +39,7 @@
 							<span
 								class="ml-2"
 								[class]="intentos < 3 ? 'text-red-700' : 'text-green-700'"
-								>{{ intentos + 1 }}
+								>{{ intentos }}
 							</span>
 						</p>
 						@for(letraOculta of palabraEnJuego(); track $index) {

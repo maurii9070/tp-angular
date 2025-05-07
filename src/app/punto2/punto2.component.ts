@@ -1,6 +1,7 @@
 import { Component } from '@angular/core'
 import { CarritoIconComponent } from '../ui/icons/carrito-icon/carrito-icon.component'
 import { CarritoModalComponent } from './carrito-modal/carrito-modal.component'
+import { CommonModule } from '@angular/common'
 
 export type Producto = {
 	id: number
@@ -8,6 +9,8 @@ export type Producto = {
 	descripcion: string
 	image: string
 	precio: number
+	descuento: number
+	estado: 'disponible' | 'vendido' | 'reparacion'
 }
 
 export type ItemCarrito = Producto & {
@@ -16,7 +19,7 @@ export type ItemCarrito = Producto & {
 
 @Component({
 	selector: 'app-punto2',
-	imports: [CarritoIconComponent, CarritoModalComponent],
+	imports: [CarritoIconComponent, CarritoModalComponent, CommonModule],
 	templateUrl: './punto2.component.html',
 })
 export class Punto2Component {
@@ -29,6 +32,8 @@ export class Punto2Component {
 			descripcion: 'Mouse gamer con RGB y 7 botones programables.',
 			image: 'mouse',
 			precio: 25000,
+			descuento: 1,
+			estado: 'disponible',
 		},
 		{
 			id: 2,
@@ -36,6 +41,8 @@ export class Punto2Component {
 			descripcion: 'Notebook Asus con procesador i7 y 16GB de RAM.',
 			image: 'notebook',
 			precio: 860000,
+			descuento: 0.15,
+			estado: 'disponible',
 		},
 		{
 			id: 3,
@@ -43,6 +50,8 @@ export class Punto2Component {
 			descripcion: 'Router TP-Link con WiFi 6 y 4 antenas externas.',
 			image: 'router',
 			precio: 120000,
+			descuento: 0,
+			estado: 'reparacion',
 		},
 		{
 			id: 4,
@@ -50,6 +59,8 @@ export class Punto2Component {
 			descripcion: 'Smartphone Samsung Galaxy S24 con 128GB de almacenamiento.',
 			image: 'smartphone',
 			precio: 1200000,
+			descuento: 0,
+			estado: 'vendido',
 		},
 		{
 			id: 5,
@@ -57,6 +68,8 @@ export class Punto2Component {
 			descripcion: 'Auriculares Sony con cancelación de ruido activa.',
 			image: 'auriculares',
 			precio: 80000,
+			descuento: 1,
+			estado: 'disponible',
 		},
 		{
 			id: 6,
@@ -64,6 +77,8 @@ export class Punto2Component {
 			descripcion: 'Impresora HP multifuncional con escáner y copiadora.',
 			image: 'impresora',
 			precio: 150000,
+			descuento: 0,
+			estado: 'reparacion',
 		},
 		{
 			id: 7,
@@ -71,6 +86,8 @@ export class Punto2Component {
 			descripcion: 'Monitor LG de 27 pulgadas con resolución 4K.',
 			image: 'monitor',
 			precio: 300000,
+			descuento: 0,
+			estado: 'vendido',
 		},
 		{
 			id: 8,
@@ -78,6 +95,8 @@ export class Punto2Component {
 			descripcion: 'Parlantes Edifier con sonido envolvente y Bluetooth.',
 			image: 'parlantes',
 			precio: 120000,
+			descuento: 0,
+			estado: 'vendido',
 		},
 		{
 			id: 9,
@@ -85,6 +104,8 @@ export class Punto2Component {
 			descripcion: 'Teclado mecánico RGB con switches mecánicos.',
 			image: 'teclado',
 			precio: 60000,
+			descuento: 0.6,
+			estado: 'disponible',
 		},
 		{
 			id: 10,
@@ -92,6 +113,8 @@ export class Punto2Component {
 			descripcion: 'Webcam Logitech con resolución Full HD y micrófono integrado.',
 			image: 'webcam',
 			precio: 70000,
+			descuento: 0,
+			estado: 'disponible',
 		},
 	]
 

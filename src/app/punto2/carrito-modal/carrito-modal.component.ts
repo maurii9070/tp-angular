@@ -1,9 +1,10 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core'
 import { ItemCarrito, Producto } from '../punto2.component'
+import { CommonModule } from '@angular/common'
 
 @Component({
 	selector: 'carrito-modal',
-	imports: [],
+	imports: [CommonModule],
 	templateUrl: './carrito-modal.component.html',
 })
 export class CarritoModalComponent {
@@ -28,5 +29,17 @@ export class CarritoModalComponent {
 
 	onCerrarModal() {
 		this.cerrarModal.emit()
+	}
+
+	precioTotalSinDescuento(): number {
+		return this.carrito.reduce((total, item) => {
+			return total + item.precio * item.cantidad
+		}, 0)
+	}
+
+	precioTotalConDescuento(): number {
+		return this.carrito.reduce((total, item) => {
+			return total + item.precio * (1 - item.descuento) * item.cantidad
+		}, 0)
 	}
 }

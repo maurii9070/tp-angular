@@ -9,7 +9,7 @@
 	</div>
 
 	<div class="grid grid-cols-1 place-items-center sm:grid-cols-2 lg:grid-cols-3 gap-4">
-		@for(producto of productos; track producto.id) {
+		@for(producto of productos; track producto.id) { @if(producto.estado == 'disponible'){
 		<div class="bg-white rounded-lg shadow-md overflow-hidden m-4 flex flex-col max-w-sm">
 			<img
 				[src]="`/assets/images/${producto.image}.webp`"
@@ -19,7 +19,26 @@
 			<div class="p-4 flex-grow">
 				<h2 class="text-xl font-bold mb-2">{{ producto.nombre }}</h2>
 				<p class="text-gray-600 mb-4">{{ producto.descripcion }}</p>
-				<p class="text-lg font-semibold text-blue-600">${{ producto.precio }}</p>
+				<p class="text-lg font-semibold text-blue-600">
+					{{ producto.precio | currency : 'USD' : '$' : '1.2-2' }}
+				</p>
+				<div>
+					<p>
+						<span class="text-green-700 font-bold"> {{ producto.descuento * 100 }}% de descuento </span>
+					</p>
+					<p>
+						Precio Especial:
+						<span class="font-bold">
+							{{
+								producto.precio - producto.precio * producto.descuento
+									| currency : 'USD' : '$' : '1.2-2'
+							}}
+						</span>
+					</p>
+				</div>
+				<p class="text-sm text-gray-500 mt-2">
+					Estado: <span class="font-bold uppercase">{{ producto.estado }}</span>
+				</p>
 			</div>
 			<div class="p-4 bg-gray-50">
 				<button
@@ -30,7 +49,7 @@
 				</button>
 			</div>
 		</div>
-		}
+		} }
 	</div>
 </section>
 
